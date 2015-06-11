@@ -56,9 +56,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Text)
         </td>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.Completion)*@
-            
+        <td>           
             @using (@Html.BeginForm("ChangeCompliteSubTask", "Task", item))
             {          
             @Html.DisplayFor(modelItem => item.Completion)
@@ -72,11 +70,17 @@
         </td>
      </tr>
     }
+    <tr>
+         <td>
+             @Html.ActionLink("AddSubtask", "AddSubtask", new { id = Model.TaskId })    
+        </td>
+    </tr>
     </table>
 
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.TaskId }) |
     @Html.ActionLink("Back to List", "Index")
+
 </p>
 

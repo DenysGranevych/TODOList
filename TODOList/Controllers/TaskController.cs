@@ -32,7 +32,9 @@ namespace TODOList.Controllers
 
         public ActionResult Details(int id = 0)
         {
+
             Task task = db.Tasks.Find(id);
+            ViewBag.MyProperty = task;
             if (task == null)
             {
                 return HttpNotFound();
@@ -113,7 +115,7 @@ namespace TODOList.Controllers
             }
             else
             {
-                task.Category = c;//нихера не робить
+                task.Category = c;//тут не працює але я не розумію чому((((
             }
             
             if (ModelState.IsValid)
@@ -165,24 +167,6 @@ namespace TODOList.Controllers
         {
             try
             {
-                //db.Tasks.Remove(x => x.Completion);
-                //List<Task> t = db.Tasks.SingleOrDefault(x => x.Completion == true);
-
-                //var order = (from o in context.SalesOrderHeaders
-                //             where o.SalesOrderID == orderId
-                //             select o).First();
-
-                //Task t = db.Tasks.Include(x => x.Moderator).SingleOrDefault(p => p.Completion == true);
-                //db.Tasks.AsParallel();
-                //TaskContext db2 = new TaskContext();
-                //Task t = db2.Tasks.Where(x => x.Completion == true).SingleOrDefault();
-                ////db.Database.
-                //while (t != null)
-                //{
-                //    db2.Tasks.Remove(t);
-                //    t = db.Tasks.SingleOrDefault(x => x.Completion == true);
-                //}
-                //db.SaveChanges();
                 List<Task> list = db.Tasks.Where(p => p.Completion == true).ToList();
                 foreach (Task item in list)
                 {
@@ -256,6 +240,7 @@ namespace TODOList.Controllers
             try
             {
                 //db.Tasks.Attach(task);
+                db.SaveChanges();
                 subTask.Completion = !subTask.Completion;
                 db.Entry(subTask).State = EntityState.Modified;
                 db.SaveChanges();
@@ -267,6 +252,32 @@ namespace TODOList.Controllers
                 return RedirectToAction("Index");
             }
             //return View(task);
+        }
+
+
+        public ActionResult AddSubtask(int id = 0)
+        {
+            SubTask subtask = new SubTask();
+            //subtask.Task = task;
+            return View(subtask);
+            //return View(task);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddSubtask(SubTask subtask, int id = 0)
+        {
+            if (ModelState.IsValid)
+            {
+                //subtask.Task.TaskId = id;
+                subtask.Task = db.Tasks.Find(id);
+                db.SubTasks.Add(subtask);
+                db.SaveChanges();
+                //db.Tasks.Find(id).ListSubtask.Add(subtask);
+                return RedirectToAction("Index");
+            }
+
+            return View(subtask);
         }
 
         protected override void Dispose(bool disposing)
