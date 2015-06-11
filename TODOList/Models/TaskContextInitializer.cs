@@ -23,6 +23,7 @@ namespace TODOList.Models
         protected override void Seed(TaskContext context)
         {
             context.Categories.Add(new Category { Text = "main" });
+            context.Categories.Add(new Category { Text = "other" });
             context.Tasks.Add(new Task { DateTime = DateTime.Now.ToUniversalTime(), Text = "new task", Completion = false, CategoryId = 0 });
             context.SubTasks.Add(new SubTask { TaskId = 0, CategoryId = 0, Completion = false, Text = "subtask 1 - create plan" });
             context.SubTasks.Add(new SubTask { TaskId = 0, CategoryId = 0, Completion = false, Text = "subtask 2 - training" });
