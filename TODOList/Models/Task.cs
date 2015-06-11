@@ -30,6 +30,7 @@ namespace TODOList.Models
 
         //це для того, щоб можна було сбворитинове завдання з новою назвою категорії.
         //заню це не правильно, але по іншому в мене не вийшло реалізувати
+        //test commit
         [Display(Name = "Category")]
         [DataType(DataType.Text)]
         public string TextCategory { get; set; }
