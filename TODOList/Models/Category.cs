@@ -11,6 +11,7 @@ namespace TODOList.Models
         public int CategoryId { get; set; }
 
         [DataType(DataType.Text)]
+        [Display(Name = "Category")]
         public string Text { get; set; }
     }
 }

@@ -12,7 +12,8 @@ using TODOList.Models;
 namespace TODOList.Controllers
 {
     public class TaskController : Controller
-    {
+    
+{
         //private
         public TaskContext db = new TaskContext();
 
@@ -197,6 +198,72 @@ namespace TODOList.Controllers
                 return RedirectToAction("Index");
             }
             catch(Exception e)
+            {
+                return RedirectToAction("Index");
+            }
+            //return View(task);
+        }
+
+        public void CheckCompliteTask()
+        {
+            foreach (Task task in db.Tasks.ToList())
+            {
+                bool Complite = true;
+                foreach (SubTask subtask in task.ListSubtask.ToList())
+                {
+                    if (subtask.Completion == false)
+                    {
+                        Complite = false;
+                    }
+                }
+                if (Complite == true && task.ListSubtask.ToList().Count > 0)
+                {
+                    task.Completion = true;
+                    db.Entry(task).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+            }
+            
+
+
+            //List<SubTask> list = subTask.Task.ListSubtask.ToList();
+            //bool Complite = false;
+            //if (list == null)
+            //{
+            //    return;
+
+            //}
+            //foreach (SubTask item in list)
+            //{
+            //    if (item.Completion == false)
+            //    {
+            //        return;
+            //    }
+            //    Complite = true;
+            //}
+            //if (Complite == true)
+            //{
+            //    subTask.Task.Completion = true;
+            //    db.Entry(subTask.Task).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //}
+            //return;
+        }
+
+        public ActionResult ChangeCompliteSubTask(SubTask subTask)
+        {
+
+            //if (ModelState.IsValid)
+            try
+            {
+                //db.Tasks.Attach(task);
+                subTask.Completion = !subTask.Completion;
+                db.Entry(subTask).State = EntityState.Modified;
+                db.SaveChanges();
+                CheckCompliteTask();
+                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            }
+            catch (Exception e)
             {
                 return RedirectToAction("Index");
             }

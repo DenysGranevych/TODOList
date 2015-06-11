@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<TODOList.Models.Task>
 
 @{
+    
     ViewBag.Title = "Task List";
 }
 
@@ -64,6 +65,71 @@
             @Html.ActionLink("Delete", "Delete", new { id = item.TaskId })
         </td>
     </tr>
+    
+    //<p>SubTask List</p>
+    
+    @*List<TODOList.Models.SubTask> ListSubtask = Model.First().ListSubtask;
+    if (ListSubtask.Count > 0) 
+    {
+        TODOList.Models.SubTask subTask = ListSubtask.First(); 
+            //@model IEnumerable<TODOList.Models.SubTask>
+        //@{ TODOList.Models.SubTask dummyModel = null; }
+    //@Html.DisplayNameFor(dummyParam => dummyModel.Text)
+    
+        //@Html.Partial("SubTask", ListSubtask)
+        //@RenderPage("~/Views/SubTask/Index.cshtml",ListSubtask.ToList())
+           <tr>
+               <th></th>
+                <th>
+                    @Html.DisplayNameFor(SubTask => SubTask.Text)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(SubTask => SubTask.Completion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(SubTask => SubTask.TaskId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(SubTask => SubTask.Category.Text)
+                </th>
+                <th></th>
+            </tr>
+
+            foreach (var item2 in ListSubtask)
+            {
+            <tr>
+                <th></th>
+                <td>
+                    @Html.DisplayFor(modelItem => item2.Text)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item2.Completion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item2.TaskId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item2.Category.Text)
+                </td>
+                <td>
+
+              
+                    @*
+                    @Html.ActionLink("Edit", "Edit", new { id=item2.SubTaskId }) |
+                    @Html.ActionLink("Details", "Details", new { id=item2.SubTaskId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item2.SubTaskId }) // not work
+                    *@
+    @*
+                </td>
+            </tr>
+        }
+     }
+     else
+     {
+        <p>SubTask is missing</p>
+     }*@
+
+    
     
 }
 

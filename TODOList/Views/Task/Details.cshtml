@@ -57,10 +57,18 @@
             @Html.DisplayFor(modelItem => item.Text)
         </td>
         <td>
+            @*@Html.DisplayFor(modelItem => item.Completion)*@
+            
+            @using (@Html.BeginForm("ChangeCompliteSubTask", "Task", item))
+            {          
             @Html.DisplayFor(modelItem => item.Completion)
+            <input type="submit" value="Complite" />
+               
+            }
+            
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
+            @Html.DisplayFor(modelItem => item.Category.Text)
         </td>
      </tr>
     }

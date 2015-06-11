@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<TODOList.Models.SubTask>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "SubTask";
 }
 
-<h2>Index</h2>
+<h2>SubTask</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,7 +18,8 @@
             @Html.DisplayNameFor(model => model.Completion)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TaskId)
+
+            @Html.DisplayNameFor(model => model.Task.Text)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Category.Text)
@@ -31,11 +32,19 @@
         <td>
             @Html.DisplayFor(modelItem => item.Text)
         </td>
-        <td>
+          <td>
+            @*@Html.DisplayFor(modelItem => item.Completion)*@
+            
+            @using (@Html.BeginForm("ChangeComplite", "SubTask",  item ))
+            {          
             @Html.DisplayFor(modelItem => item.Completion)
+            <input type="submit" value="Complite" />
+               
+            }
+            
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TaskId)
+            @Html.DisplayFor(modelItem => item.Task.Text)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Category.Text)

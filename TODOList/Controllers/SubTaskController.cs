@@ -114,6 +114,25 @@ namespace TODOList.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult ChangeComplite(SubTask subTask)
+        {
+
+            //if (ModelState.IsValid)
+            try
+            {
+                //db.Tasks.Attach(task);
+                subTask.Completion = !subTask.Completion;
+                db.Entry(subTask).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index");
+            }
+            //return View(task);
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

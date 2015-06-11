@@ -30,11 +30,11 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.TaskId)
+            @Html.LabelFor(model => model.Task.Text)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.TaskId)
-            @Html.ValidationMessageFor(model => model.TaskId)
+            @Html.EditorFor(model => model.Task.Text)
+            @Html.ValidationMessageFor(model => model.Task.Text)
         </div>
 
         <div class="editor-label">

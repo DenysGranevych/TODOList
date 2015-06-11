@@ -24,13 +24,15 @@ namespace TODOList.Models
         {
             context.Categories.Add(new Category { Text = "main" });
             context.Categories.Add(new Category { Text = "other" });
-            context.Tasks.Add(new Task { DateTime = DateTime.Now.ToUniversalTime(), Text = "new task", Completion = false, Category = new Category {Text = "Task for test"} });
-            //context.Tasks.Add(new Task { DateTime = DateTime.Now.ToUniversalTime(), Text = "new task", Completion = false, Category = context.Categories.Find(2) });//error
-            context.SubTasks.Add(new SubTask { TaskId = 0, Category = context.Categories.Find(2), Completion = false, Text = "subtask 1 - create plan" });
-            context.SubTasks.Add(new SubTask { TaskId = 0, Category = context.Categories.Find(2), Completion = false, Text = "subtask 2 - training" });
+            context.Tasks.Add(new Task { DateTime = DateTime.Now.ToUniversalTime(), Text = "new task1", Completion = false, Category = new Category {Text = "Task for test"} });
             context.SaveChanges();
-            context.Tasks.Add(new Task { DateTime = DateTime.Now.ToUniversalTime(), Text = "new task", Completion = false, Category = context.Categories.Find(2) });
-            context.SubTasks.Add(new SubTask { TaskId = 1, Category = context.Categories.Find(1), Completion = false, Text = "subtask 1 - create plan" });
+            //context.Tasks.Add(new Task { DateTime = DateTime.Now.ToUniversalTime(), Text = "new task", Completion = false, Category = context.Categories.Find(2) });//error
+            context.SubTasks.Add(new SubTask { Task = context.Tasks.Find(1), Category = context.Categories.Find(2), Completion = false, Text = "subtask 1 - create plan" });
+            context.SubTasks.Add(new SubTask { Task = context.Tasks.Find(1), Category = context.Categories.Find(2), Completion = false, Text = "subtask 2 - training" });
+            context.SaveChanges();
+            context.Tasks.Add(new Task { DateTime = DateTime.Now.ToUniversalTime(), Text = "new task2", Completion = false, Category = context.Categories.Find(2) });
+            context.SaveChanges();
+            context.SubTasks.Add(new SubTask { Task = context.Tasks.Find(2), Category = context.Categories.Find(1), Completion = false, Text = "subtask 1 - create plan" });
             context.SaveChanges();
             //context.Tasks.First().ListSubtask.Add(context.SubTasks.First());
             //context.Tasks.First().ListSubtask.Add(context.SubTasks.Last());
