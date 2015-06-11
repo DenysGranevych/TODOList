@@ -1,0 +1,74 @@
+﻿@model TODOList.Models.Task
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Task</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Text)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Text)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Completion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Completion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TextCategory)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TextCategory)
+    </div>
+
+    <table>
+        <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Text)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Completion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TextCategory)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.ListSubtask) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Text)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Completion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryId)
+        </td>
+     </tr>
+    }
+    </table>
+
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.TaskId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+

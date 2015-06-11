@@ -1,0 +1,43 @@
+﻿@model TODOList.Models.SubTask
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>SubTask</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Text)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Text)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Completion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Completion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TaskId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TaskId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CategoryId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CategoryId)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.SubTaskId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
