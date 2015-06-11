@@ -26,7 +26,7 @@ namespace TODOList.Models
 
         [Display(Name = "Category")]
         [DataType(DataType.Text)]
-        public virtual int CategoryId { get; set; }
+        public virtual Category Category { get; set; }
 
         //це для того, щоб можна було сбворитинове завдання з новою назвою категорії.
         //заню це не правильно, але по іншому в мене не вийшло реалізувати
