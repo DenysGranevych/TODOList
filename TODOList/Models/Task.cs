@@ -8,6 +8,7 @@ namespace TODOList.Models
 {
     public class Task
     {
+        [Key]
         public int TaskId { get; set; }
 
         [DataType(DataType.DateTime)]
@@ -27,6 +28,8 @@ namespace TODOList.Models
         [Display(Name = "Category")]
         [DataType(DataType.Text)]
         public virtual Category Category { get; set; }
+
+        //public int CategoryID { get; set; }
 
         //це для того, щоб можна було сбворитинове завдання з новою назвою категорії.
         //заню це не правильно, але по іншому в мене не вийшло реалізувати

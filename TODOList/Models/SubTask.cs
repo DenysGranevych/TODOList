@@ -8,6 +8,7 @@ namespace TODOList.Models
 {
     public class SubTask
     {
+        [Key]
         public int SubTaskId { get; set; }
 
         [DataType(DataType.MultilineText)]
@@ -17,6 +18,8 @@ namespace TODOList.Models
 
         public virtual int TaskId { get; set; }
 
-        public virtual int CategoryId { get; set; }
+        [Display(Name = "Category")]
+        [DataType(DataType.Text)]
+        public virtual Category Category { get; set; }
     }
 }

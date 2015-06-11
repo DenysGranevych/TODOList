@@ -59,13 +59,15 @@ namespace TODOList.Controllers
             Category c = db.Categories.SingleOrDefault(x => x.Text == task.TextCategory);
             if (c == null)
             {
-                db.Categories.Add(new Category { Text = task.TextCategory });
+                //!!!!!!
+                c = new Category { Text = task.TextCategory };
+                db.Categories.Add(c);
                 db.SaveChanges();
-                task.CategoryId = db.Categories.SingleOrDefault(x => x.Text == task.TextCategory).CategoryId;
+                task.Category = c;
             }
             else
             {
-                task.CategoryId = c.CategoryId;
+                task.Category = c;
             }
             
 
@@ -99,8 +101,23 @@ namespace TODOList.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Task task)
         {
+            Category c = db.Categories.SingleOrDefault(x => x.Text == task.Category.Text);
+            if (c == null)
+            {
+                //!!!!!!
+                c = new Category { Text = task.Category.Text };
+                db.Categories.Add(c);
+                db.SaveChanges();
+                task.Category = c;
+            }
+            else
+            {
+                task.Category = c;//нихера не робить
+            }
+            
             if (ModelState.IsValid)
             {
+                //db.Tasks.Attach(task);
                 db.Entry(task).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -165,6 +182,25 @@ namespace TODOList.Controllers
 
             }
             return RedirectToAction("Index");
+        }
+
+        public ActionResult ChangeComplite(Task task)
+        {
+
+            //if (ModelState.IsValid)
+            try
+            {
+                //db.Tasks.Attach(task);
+                task.Completion = !task.Completion;
+                db.Entry(task).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch(Exception e)
+            {
+                return RedirectToAction("Index");
+            }
+            //return View(task);
         }
 
         protected override void Dispose(bool disposing)

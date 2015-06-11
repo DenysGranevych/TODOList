@@ -22,7 +22,7 @@
             @Html.DisplayNameFor(model => model.Completion)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CategoryId)
+            @Html.DisplayNameFor(model => model.Category)
         </th>
         <th></th>
     </tr>
@@ -37,26 +37,26 @@
         </td>
         <td>
             @*@Html.DisplayFor(modelItem => item.Completion)*@
-            @*@using (@Html.BeginForm("EditCompletion", "Task"))
-            {
+            
+            @using (@Html.BeginForm("ChangeComplite", "Task",  item ))
+            {          
             @Html.DisplayFor(modelItem => item.Completion)
-                 <p>
-            <input type="submit" value="Save" />
-        </p>
-            }*@
-            @Html.DisplayFor(modelItem => item.Completion)
+            <input type="submit" value="Complite" />
+               
+            }
+            
         </td>
         <td>
             @{
                 //TODOList.Controllers.TaskController
-                TODOList.Models.TaskContext db = new TODOList.Models.TaskContext();
-                db.SaveChanges();
+                //TODOList.Models.TaskContext db = new TODOList.Models.TaskContext();
+                //db.SaveChanges();
                 
-                db.Categories.SingleOrDefault(x => x.CategoryId == item.CategoryId);
+                //db.Categories.SingleOrDefault(x => x.CategoryId == item.CategoryId);
                 //TODOList.Models.Category = db.Categories.SingleOrDefault(x => x.CategoryId == item.CategoryId);
                 //string s = db.Categories.SingleOrDefault(x => x.CategoryId == item.CategoryId).Text.ToString();
                 }
-            @Html.DisplayFor(modelItem => item.CategoryId)
+            @Html.DisplayFor(modelItem => item.Category.Text)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.TaskId }) |
@@ -64,6 +64,7 @@
             @Html.ActionLink("Delete", "Delete", new { id = item.TaskId })
         </td>
     </tr>
+    
 }
 
 </table>

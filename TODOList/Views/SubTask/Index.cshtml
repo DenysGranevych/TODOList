@@ -21,7 +21,7 @@
             @Html.DisplayNameFor(model => model.TaskId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CategoryId)
+            @Html.DisplayNameFor(model => model.Category.Text)
         </th>
         <th></th>
     </tr>
@@ -38,7 +38,7 @@
             @Html.DisplayFor(modelItem => item.TaskId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
+            @Html.DisplayFor(modelItem => item.Category.Text)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.SubTaskId }) |
