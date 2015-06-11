@@ -7,8 +7,6 @@ using System.Web;
 using System.Web.Mvc;
 using TODOList.Models;
 
-
-
 namespace TODOList.Controllers
 {
     public class TaskController : Controller
