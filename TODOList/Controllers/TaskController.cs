@@ -139,6 +139,8 @@ namespace TODOList.Controllers
             return View(task);
         }
 
+
+
         //
         // POST: /Task/Delete/5
 
@@ -147,6 +149,13 @@ namespace TODOList.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Task task = db.Tasks.Find(id);
+
+            List<SubTask> listSub = task.ListSubtask.ToList();
+                foreach (SubTask itemsub in listSub)
+                {
+                    db.SubTasks.Remove(itemsub);
+                    db.SaveChanges();
+                }
             db.Tasks.Remove(task);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -174,13 +183,28 @@ namespace TODOList.Controllers
                 //    t = db.Tasks.SingleOrDefault(x => x.Completion == true);
                 //}
                 //db.SaveChanges();
-                db.Tasks.Where(p => p.Completion == true)
-               .ToList().ForEach(p => db.Tasks.Remove(p));
-                db.SaveChanges();
+                List<Task> list = db.Tasks.Where(p => p.Completion == true).ToList();
+                foreach (Task item in list)
+                {
+
+                    //db.SubTasks.Where(p => p.Task == item).ToList().ForEach(p => db.SubTasks.Remove(p));
+                    List<SubTask> listSub = item.ListSubtask.ToList();
+                    foreach (SubTask itemsub in listSub)
+                    {
+                        db.SubTasks.Remove(itemsub);
+                        db.SaveChanges();
+                    }
+                    db.SaveChanges();
+                    db.Tasks.Remove(item);
+                    db.SaveChanges();
+                }
+               // db.Tasks.Where(p => p.Completion == true)
+               //.ToList().ForEach(p => db.Tasks.Remove(p));
+                //db.SaveChanges();
             }
             catch(Exception e)
             {
-
+                //return e.ToString();
             }
             return RedirectToAction("Index");
         }
@@ -223,31 +247,6 @@ namespace TODOList.Controllers
                     db.SaveChanges();
                 }
             }
-            
-
-
-            //List<SubTask> list = subTask.Task.ListSubtask.ToList();
-            //bool Complite = false;
-            //if (list == null)
-            //{
-            //    return;
-
-            //}
-            //foreach (SubTask item in list)
-            //{
-            //    if (item.Completion == false)
-            //    {
-            //        return;
-            //    }
-            //    Complite = true;
-            //}
-            //if (Complite == true)
-            //{
-            //    subTask.Task.Completion = true;
-            //    db.Entry(subTask.Task).State = EntityState.Modified;
-            //    db.SaveChanges();
-            //}
-            //return;
         }
 
         public ActionResult ChangeCompliteSubTask(SubTask subTask)
